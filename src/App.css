@@ -2,3 +2,9 @@ body {
   font-family: 'Open Sans Condensed', sans-serif;
   padding: 20px 60px;
 }
+
+/* React router dom's Link component uses anchor tag behind the scenes */
+a {
+  text-decoration: none;
+  color: black;
+}
