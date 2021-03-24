@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router';
 import './App.css';
 import Header from './components/header/header.component';
@@ -20,11 +20,12 @@ const App = () => {
             id: snapShot.id,
             ...snapShot.data(),
           });
-          // console.log('currentUser:', currentUser);
+          // console.log('currentUser state:', currentUser);
         });
       } else {
         setCurrentUser(userAuth); // null
       }
+      console.log('currentUser:', userAuth);
     });
 
     return unsubscribeFromAuth;
