@@ -25,7 +25,7 @@ const App = () => {
       } else {
         setCurrentUser(userAuth); // null
       }
-      console.log('currentUser:', userAuth);
+      // console.log('currentUser:', userAuth);
     });
 
     return unsubscribeFromAuth;
