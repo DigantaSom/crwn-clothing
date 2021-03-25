@@ -24,8 +24,7 @@ const SignIn = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    // TODO: handle sign in with firebase
+    
     try {
       await auth.signInWithEmailAndPassword(email, password);
       setFormData({
