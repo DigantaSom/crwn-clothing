@@ -29,6 +29,11 @@ const App = ({ currentUser, setCurrentUser }) => {
         setCurrentUser(userAuth); // null
       }
       // console.log('currentUser:', userAuth);
+
+      // addCollectionAndDocuments(
+      //   'collections',
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))  // to not add only title & items fields
+      // );
     });
 
     return unsubscribeFromAuth;
@@ -53,6 +58,7 @@ const App = ({ currentUser, setCurrentUser }) => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = dispatch => ({

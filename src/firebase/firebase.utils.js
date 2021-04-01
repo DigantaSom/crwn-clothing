@@ -11,15 +11,21 @@ const firebaseConfig = {
   appId: '1:914134929260:web:6666ac8b75dd0964946d49',
 };
 
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) {
     return;
   }
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
+  // const collectionRef = firestore.collection('users');
 
   const snapShot = await userRef.get();
   // console.log(snapShot);
+  // const collectionSnapshot = await collectionRef.get();
+  // console.log({ collection: collectionSnapshot.docs.map(doc => doc.data()) });
 
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
@@ -40,8 +46,36 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+  // console.log('collectionRef:', collectionRef);
+
+  // with 'batch', we try to achieve Atomicity in transaction; that's why we aren't using newDocRef.set(...)
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    // console.log(newDocRef);
+    batch.set(newDocRef, obj);
+  });
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformedCollections = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+  // console.log('transformedCollections:', transformedCollections);
+  return transformedCollections.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
