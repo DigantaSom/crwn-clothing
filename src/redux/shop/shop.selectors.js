@@ -17,7 +17,8 @@ export const selectCollections = createSelector([selectShop], shop => shop.colle
 // after we've converted the shop data from array of objects to only nested objects for data optimization.
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => Object.keys(collections).map(key => collections[key])
+  collections =>
+    collections ? Object.keys(collections).map(key => collections[key]) : []
 );
 
 // This selector needs a part of the state depending on the URL parameter. It's used in collection component.
@@ -35,5 +36,7 @@ export const selectCollectionsForPreview = createSelector(
 // Same but instead of an array, we're using object in shop data, to optimize the data.
 // Because Objects (Hash Table data structure) are far better for searching items than Array.
 export const selectCollection = memoize(collectionUrlParam =>
-  createSelector([selectCollections], collections => collections[collectionUrlParam])
+  createSelector([selectCollections], collections =>
+    collections ? collections[collectionUrlParam] : null
+  )
 );
