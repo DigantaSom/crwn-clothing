@@ -1,7 +1,3 @@
-import {
-  convertCollectionsSnapshotToMap,
-  firestore,
-} from '../../firebase/firebase.utils';
 import ShopActionTypes from './shop.types';
 
 const {
@@ -24,22 +20,22 @@ export const fetchCollectionsFailure = errorMessage => ({
   payload: errorMessage,
 });
 
-export const fetchCollectionsStartAsync = () => {
-  return dispatch => {
-    const collectionRef = firestore.collection('collections');
+// export const fetchCollectionsStartAsync = () => {
+//   return dispatch => {
+//     const collectionRef = firestore.collection('collections');
 
-    dispatch(fetchCollectionsStart());
+//     dispatch(fetchCollectionsStart());
 
-    // Promise pattern (one-off API calls)
-    collectionRef
-      .get()
-      .then(snapshot => {
-        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        dispatch(fetchCollectionsSuccess(collectionsMap));
-      })
-      .catch(error => dispatch(fetchCollectionsFailure(error.message)));
-  };
-};
+//     // Promise pattern (one-off API calls)
+//     collectionRef
+//       .get()
+//       .then(snapshot => {
+//         const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+//         dispatch(fetchCollectionsSuccess(collectionsMap));
+//       })
+//       .catch(error => dispatch(fetchCollectionsFailure(error.message)));
+//   };
+// };
 
 /* Note: other alternatives to the above Promise pattern are ->
 
