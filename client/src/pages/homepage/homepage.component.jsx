@@ -3,6 +3,7 @@ import { HomePageContainer } from './homepage.styles';
 // import './homepage.styles.scss';
 
 const HomePage = () => {
+  // throw Error; // (manually threw error to test ErrorBoundary component)
   return (
     <HomePageContainer>
       <Directory />
