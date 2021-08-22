@@ -14,6 +14,16 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: 'select_account',
+});
+// export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) {
     return;
@@ -87,13 +97,24 @@ export const getCurrentUser = () => {
   });
 };
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+export const getUserCartRef = async userId => {
+  try {
+    const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+    const snapshot = await cartsRef.get();
 
-export const googleProvider = new firebase.auth.GoogleAuthProvider();
-googleProvider.setCustomParameters({
-  prompt: 'select_account',
-});
-// export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+    if (snapshot.empty) {
+      const cartDocRef = firestore.collection('carts').doc();
+      await cartDocRef.set({
+        userId,
+        cartItems: [],
+      });
+      return cartDocRef;
+    } else {
+      return snapshot.docs[0].ref;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default firebase;
