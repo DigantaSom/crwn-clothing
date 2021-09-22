@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CartIcon component should render CartIcon component 1`] = `
+<div
+  className="cart-icon"
+  onClick={[MockFunction]}
+>
+  <ForwardRef(SvgShoppingBag)
+    className="shopping-icon"
+  />
+  <span
+    className="item-count"
+  >
+    0
+  </span>
+</div>
+`;

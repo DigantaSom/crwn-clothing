@@ -1,7 +1,7 @@
 import CartActionTypes from './cart.types';
 import { addItemToCart, removeItemFromCart } from './cart.utils';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   hidden: true,
   cartItems: [],
 };
@@ -39,10 +39,10 @@ const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
       };
 
     case CartActionTypes.SET_CART_FROM_FIREBASE:
-    return {
-      ...state,
-      cartItems: payload,
-    };
+      return {
+        ...state,
+        cartItems: payload,
+      };
 
     default:
       return state;

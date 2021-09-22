@@ -1,6 +1,8 @@
 import { useEffect, lazy, Suspense } from 'react';
-import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 import Spinner from '../../components/spinner/spinner.component';
 // const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
@@ -8,14 +10,12 @@ import Spinner from '../../components/spinner/spinner.component';
 // import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 // import CollectionPageContainer from '../collection/collection.container';
 
-import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
-
 const CollectionsOverviewContainer = lazy(() =>
   import('../../components/collections-overview/collections-overview.container'),
 );
 const CollectionPageContainer = lazy(() => import('../collection/collection.container'));
 
-const ShopPage = ({ match, fetchCollectionsStart }) => {
+export const ShopPage = ({ match, fetchCollectionsStart }) => {
   // useEffect fires after first render of this component,
   // that's why isCollectionLoading is getting false (default from shop reducer) value at first render.
   // Solution: 'selectIsCollectionLoaded' from shop.selectors.js

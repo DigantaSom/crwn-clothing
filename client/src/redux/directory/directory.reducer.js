@@ -1,6 +1,6 @@
 import DIRECTORY_DATA from './directory.data';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   sections: DIRECTORY_DATA,
 };
 

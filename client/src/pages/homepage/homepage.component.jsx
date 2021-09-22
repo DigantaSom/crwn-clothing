@@ -1,8 +1,9 @@
 import { Profiler } from 'react';
 
 import Directory from '../../components/directory/directory.component';
-import { HomePageContainer } from './homepage.styles';
+
 // import './homepage.styles.scss';
+import { HomePageContainer } from './homepage.styles';
 
 const HomePage = () => {
   // throw Error; // (manually threw error to test ErrorBoundary component)

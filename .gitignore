@@ -28,6 +28,7 @@ client/yarn-error.log*
 client/zz-helper.txt
 client/zz-redux-saga.txt
 client/zz-redux-saga-refactor-previous-code.txt
+client/zz-test.txt
 
 # --server--
 

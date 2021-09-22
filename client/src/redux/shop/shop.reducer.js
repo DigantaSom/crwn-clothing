@@ -1,18 +1,15 @@
 // import SHOP_DATA from './shop.data';
 import ShopActionTypes from './shop.types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   // collections: SHOP_DATA,
   collections: null,
   isFetching: false,
   errorMessage: undefined,
 };
 
-const {
-  FETCH_COLLECTIONS_START,
-  FETCH_COLLECTIONS_SUCCESS,
-  FETCH_COLLECTIONS_FAILURE,
-} = ShopActionTypes;
+const { FETCH_COLLECTIONS_START, FETCH_COLLECTIONS_SUCCESS, FETCH_COLLECTIONS_FAILURE } =
+  ShopActionTypes;
 
 const shopReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
